@@ -1,6 +1,6 @@
 {
   "name": "react-tos",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "React component for transitioning elements on scroll",
   "main": "build/index.js",
   "scripts": {
