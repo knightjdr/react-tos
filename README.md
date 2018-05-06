@@ -1,4 +1,5 @@
 # React transition on scroll (react-tos)
+[![npm version](https://badge.fury.io/js/react-tos.svg)](https://badge.fury.io/js/react-tos)
 
 React component for transitioning elements on scroll.
 
