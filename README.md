@@ -1,6 +1,8 @@
 # React transition on scroll (react-tos)
 
-React component for transitioning elements on scroll
+React component for transitioning elements on scroll.
+
+[Demo](https://knightjdr.github.io/react-tos/)
 
 ## Install
 
