@@ -4,7 +4,7 @@ import ReactTos from '../lib';
 import Arrow from './media/arrow.svg';
 import Github from './media/github.svg';
 
-import './css/App.css';
+import './App.css';
 
 const App = () => (
   <div className="App">
