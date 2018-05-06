@@ -3,14 +3,34 @@ import React, { Component } from 'react';
 
 import Style from './style';
 
+const defaultConfig = {
+  bottomOffset: 0,
+  duration: '1.2s',
+  startingOpacity: 0,
+  startingScale: 1,
+  timingFunction: 'ease-in',
+  transformOrigin: '50% 50%',
+};
+
 class TransitionOnScroll extends Component {
   constructor(props) {
     super(props);
+    const config = {
+      bottomOffset: this.props.config.bottomOffset || defaultConfig.bottomOffset,
+      duration: this.props.config.duration || defaultConfig.duration,
+      rotate: this.props.config.rotate || 0,
+      startingOpacity: this.props.config.startingOpacity || defaultConfig.startingOpacity,
+      startingScale: this.props.config.startingScale || defaultConfig.startingScale,
+      timingFunction: this.props.config.timingFunction || defaultConfig.timingFunction,
+      transformOrigin: this.props.config.transformOrigin || defaultConfig.transformOrigin,
+      translateX: this.props.config.translateX || 0,
+    };
     this.state = {
       duration: 0,
+      config,
       isVisible: false,
       onScrollAdded: null,
-      transform: this.defineTransform(),
+      transform: this.defineTransform(config),
     };
   }
   componentDidMount = () => {
@@ -19,7 +39,7 @@ class TransitionOnScroll extends Component {
       window.addEventListener('scroll', this.handleScroll);
     }
     this.setState({
-      duration: show ? 0 : this.props.config.duration,
+      duration: show ? 0 : this.state.config.duration,
       isVisible: show,
       onScrollAdded: !show,
     });
@@ -29,9 +49,19 @@ class TransitionOnScroll extends Component {
       window.removeEventListener('scroll', this.handleScroll);
     }
   }
-  defineTransform = () => (
-    `scale(${this.props.config.startingScale})`
-  )
+  defineTransform = (config) => {
+    const transforms = [];
+    if (config.rotate) {
+      transforms.push(`rotate(${config.rotate})`);
+    }
+    if (config.startingScale < 1) {
+      transforms.push(`scale(${config.startingScale})`);
+    }
+    if (config.translateX) {
+      transforms.push(`translateX(${config.translateX})`);
+    }
+    return transforms.join(' ');
+  }
   handleScroll = () => {
     if (this.state.onScrollAdded) {
       const show = this.showContainer();
@@ -47,7 +77,7 @@ class TransitionOnScroll extends Component {
   showContainer = () => {
     const { top } = this.elem.getBoundingClientRect();
     const bottom = window.innerHeight;
-    return bottom > top - this.props.config.bottomOffset;
+    return bottom > top - this.state.config.bottomOffset;
   }
   render() {
     return (
@@ -57,10 +87,11 @@ class TransitionOnScroll extends Component {
         style={{
           ...Style,
           ...{
-            opacity: this.state.isVisible ? 1 : this.props.config.startingOpacity,
+            opacity: this.state.isVisible ? 1 : this.state.config.startingOpacity,
             transform: this.state.isVisible ? 'none' : this.state.transform,
-            transitionDuration: `${this.state.duration}s`,
-            transitionTimingFunction: this.props.config.timingFunction,
+            transformOrigin: this.state.config.transformOrigin,
+            transitionDuration: this.state.duration,
+            transitionTimingFunction: this.state.config.timingFunction,
           },
         }}
       >
@@ -73,13 +104,7 @@ class TransitionOnScroll extends Component {
 TransitionOnScroll.defaultProps = {
   children: null,
   className: '',
-  config: {
-    duration: 1,
-    bottomOffset: 0,
-    startingScale: 0.95,
-    startingOpacity: 0,
-    timingFunction: 'ease-in',
-  },
+  config: defaultConfig,
 };
 
 TransitionOnScroll.propTypes = {
@@ -91,11 +116,14 @@ TransitionOnScroll.propTypes = {
   ]),
   className: PropTypes.string,
   config: PropTypes.shape({
-    duration: PropTypes.number,
+    duration: PropTypes.string,
     bottomOffset: PropTypes.number,
+    rotate: PropTypes.string,
     startingScale: PropTypes.number,
     startingOpacity: PropTypes.number,
     timingFunction: PropTypes.string,
+    translateX: PropTypes.string,
+    transformOrigin: PropTypes.string,
   }),
 };
 
