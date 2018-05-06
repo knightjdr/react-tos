@@ -131,7 +131,7 @@ config = {
 
 ### Transform origin
 
-The default transform origin is used for all transformation (50% 50%). This can
+The default transform origin is used for all transformations (50% 50%). This can
 be changed via the config prop.
 
 ### Note
