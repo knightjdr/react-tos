@@ -129,7 +129,7 @@ module.exports = {
               limit: 10000,
               name: '[name].[ext]',
               outputPath: 'media/',
-              publicPath: '../'
+              publicPath: './'
             }
           },
           // Process JS with Babel.
