@@ -11,14 +11,14 @@ React component for transitioning elements on scroll
 ```
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactTOS from 'react-tos'
+import ReactTos from 'react-tos'
 
 ReactDOM.render(
-  <ReactTOS>
+  <ReactTos>
     <div>
       Content to transition into the view on scroll
     </div>
-  </ ReactTOS>,
+  </ReactTos>,
   document.getElementById('root'),
 );
 ```
