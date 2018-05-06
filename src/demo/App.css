@@ -11,7 +11,7 @@ body {
 .App-landing-container {
   align-items: center;
   background-color: #008585;
-  background-image: url("./bedge-grunge.png");
+  background-image: url("./media/bedge-grunge.png");
   display: flex;
   flex-direction: column;
   height: 100vh;

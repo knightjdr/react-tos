@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactTos from '../lib';
 
-import Arrow from './arrow.svg';
-import Github from './github.svg';
+import Arrow from './media/arrow.svg';
+import Github from './media/github.svg';
 
 import './App.css';
 
@@ -55,22 +55,22 @@ const App = () => (
       <div className="Transition-title-light">
         Translate in
       </div>
-      <ReactTos config={{ translateX: '-100px' }}>
+      <ReactTos config={{ translate: '-100px' }}>
         <div className="Transition-container-light">
           Translate in left
         </div>
       </ReactTos>
-      <ReactTos config={{ translateX: '100px' }}>
+      <ReactTos config={{ translate: '100px' }}>
         <div className="Transition-container-light">
           Translate in right
         </div>
       </ReactTos>
-      <ReactTos config={{ translateX: '-200px' }}>
+      <ReactTos config={{ translate: '-200px' }}>
         <div className="Transition-container-light">
           Translate in left
         </div>
       </ReactTos>
-      <ReactTos config={{ translateX: '200px' }}>
+      <ReactTos config={{ translate: '200px' }}>
         <div className="Transition-container-light">
           Translate in right
         </div>
@@ -128,27 +128,53 @@ const App = () => (
     </div>
     <div className="App-transition-container-light">
       <div className="Transition-title-dark">
-        Combine effect
+        Flip in
+      </div>
+      <ReactTos config={{ flip: '-90deg', startingOpacity: 1 }}>
+        <div className="Transition-container-dark">
+          Flip in
+        </div>
+      </ReactTos>
+      <ReactTos config={{ flip: '90deg', startingOpacity: 1 }}>
+        <div className="Transition-container-dark">
+          Flip in
+        </div>
+      </ReactTos>
+      <ReactTos config={{ flip: '-179deg', startingOpacity: 1 }}>
+        <div className="Transition-container-dark">
+          Flip in
+        </div>
+      </ReactTos>
+      <ReactTos config={{ flip: '179deg', startingOpacity: 1 }}>
+        <div className="Transition-container-dark">
+          Flip in
+        </div>
+      </ReactTos>
+    </div>
+    <div className="App-transition-container-dark">
+      <div className="Transition-title-light">
+        Combine effects
       </div>
       <ReactTos config={{ startingScale: 0.5 }}>
-        <div className="Transition-container-dark">
+        <div className="Transition-container-light">
           Fade and scale in
         </div>
       </ReactTos>
-      <ReactTos config={{ translateX: '-200px' }}>
-        <div className="Transition-container-dark">
+      <ReactTos config={{ translate: '-200px' }}>
+        <div className="Transition-container-light">
           Fade and translate in
         </div>
       </ReactTos>
       <ReactTos
         config={{
+          startingOpacity: 1,
           startingScale: 0.5,
           timingFunction: 'linear',
           transformOrigin: '0 0',
-          translateX: '-200px',
+          translate: '-200px',
         }}
       >
-        <div className="Transition-container-dark">
+        <div className="Transition-container-light">
           Translate and scale
         </div>
       </ReactTos>

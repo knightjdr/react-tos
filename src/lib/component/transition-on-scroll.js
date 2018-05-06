@@ -18,12 +18,13 @@ class TransitionOnScroll extends Component {
     const config = {
       bottomOffset: this.props.config.bottomOffset || defaultConfig.bottomOffset,
       duration: this.props.config.duration || defaultConfig.duration,
+      flip: this.props.config.flip || 0,
       rotate: this.props.config.rotate || 0,
       startingOpacity: this.props.config.startingOpacity || defaultConfig.startingOpacity,
       startingScale: this.props.config.startingScale || defaultConfig.startingScale,
       timingFunction: this.props.config.timingFunction || defaultConfig.timingFunction,
       transformOrigin: this.props.config.transformOrigin || defaultConfig.transformOrigin,
-      translateX: this.props.config.translateX || 0,
+      translate: this.props.config.translate || 0,
     };
     this.state = {
       duration: 0,
@@ -51,14 +52,17 @@ class TransitionOnScroll extends Component {
   }
   defineTransform = (config) => {
     const transforms = [];
+    if (config.flip) {
+      transforms.push(`rotateY(${config.flip})`);
+    }
     if (config.rotate) {
-      transforms.push(`rotate(${config.rotate})`);
+      transforms.push(`rotateZ(${config.rotate})`);
     }
     if (config.startingScale < 1) {
       transforms.push(`scale(${config.startingScale})`);
     }
-    if (config.translateX) {
-      transforms.push(`translateX(${config.translateX})`);
+    if (config.translate) {
+      transforms.push(`translate(${config.translate})`);
     }
     return transforms.join(' ');
   }
@@ -116,13 +120,14 @@ TransitionOnScroll.propTypes = {
   ]),
   className: PropTypes.string,
   config: PropTypes.shape({
-    duration: PropTypes.string,
     bottomOffset: PropTypes.number,
+    duration: PropTypes.string,
+    flip: PropTypes.string,
     rotate: PropTypes.string,
     startingScale: PropTypes.number,
     startingOpacity: PropTypes.number,
     timingFunction: PropTypes.string,
-    translateX: PropTypes.string,
+    translate: PropTypes.string,
     transformOrigin: PropTypes.string,
   }),
 };
